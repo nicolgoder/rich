@@ -110,8 +110,22 @@ public class Text : IRenderable
         NoWrap = noWrap;
         End = end;
         TabSize = tabSize;
-        _spans = spans ?? new List<Span>();
         _length = text.Length;
+
+        // Initialize spans
+        if (spans != null)
+        {
+            _spans = spans;
+        }
+        else
+        {
+            _spans = new List<Span>();
+            // If a style is provided and text is not empty, create a span covering the entire text
+            if (style != null && !style.IsNull && !string.IsNullOrEmpty(text))
+            {
+                _spans.Add(new Span(0, text.Length, style));
+            }
+        }
     }
 
     /// <summary>
