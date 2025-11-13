@@ -26,27 +26,24 @@ public enum ControlType
 /// <summary>
 /// Represents a control code that can be embedded in a segment.
 /// </summary>
-public abstract record ControlCode
-{
-    public abstract ControlType Type { get; }
-}
+public abstract record ControlCode(ControlType Type);
 
 /// <summary>
 /// A simple control code with no parameters.
 /// </summary>
-public record SimpleControlCode(ControlType Type) : ControlCode;
+public record SimpleControlCode(ControlType Type) : ControlCode(Type);
 
 /// <summary>
 /// A control code with a single integer parameter.
 /// </summary>
-public record IntControlCode(ControlType Type, int Value) : ControlCode;
+public record IntControlCode(ControlType Type, int Value) : ControlCode(Type);
 
 /// <summary>
 /// A control code with a string parameter.
 /// </summary>
-public record StringControlCode(ControlType Type, string Value) : ControlCode;
+public record StringControlCode(ControlType Type, string Value) : ControlCode(Type);
 
 /// <summary>
 /// A control code with two integer parameters.
 /// </summary>
-public record TwoIntControlCode(ControlType Type, int Value1, int Value2) : ControlCode;
+public record TwoIntControlCode(ControlType Type, int Value1, int Value2) : ControlCode(Type);
